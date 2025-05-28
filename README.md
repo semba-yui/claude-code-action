@@ -4,7 +4,7 @@
 
 **This is a fork of the official Claude Code Action that adds support for OAuth authentication, allowing Claude Max subscribers to use their subscription in GitHub Actions.**
 
-**How to use this fork**: https://grll.bearblog.dev/use-claude-github-actions-with-claude-max/
+**How to use this fork**: https://semba-yui.bearblog.dev/use-claude-github-actions-with-claude-max/
 
 A general-purpose [Claude Code](https://claude.ai/code) action for GitHub PRs and issues that can answer questions and implement code changes. This action listens for a trigger phrase in comments and activates Claude act on the request. It supports multiple authentication methods including:
 - **OAuth authentication for Claude Max subscribers** (new in this fork)
@@ -92,7 +92,7 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude PR Action
-        uses: grll/claude-code-action@beta
+        uses: semba-yui/claude-code-action@main
         with:
           use_oauth: true
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -202,7 +202,7 @@ on:
       - "src/api/**/*.ts"
 
 steps:
-  - uses: grll/claude-code-action@beta  # Fork with OAuth support
+  - uses: semba-yui/claude-code-action@main  # Fork with OAuth support
     with:
       direct_prompt: |
         Update the API documentation in README.md to reflect
@@ -226,7 +226,7 @@ jobs:
       github.event.pull_request.user.login == 'developer1' ||
       github.event.pull_request.user.login == 'external-contributor'
     steps:
-      - uses: grll/claude-code-action@beta  # Fork with OAuth support
+      - uses: semba-yui/claude-code-action@main  # Fork with OAuth support
         with:
           direct_prompt: |
             Please provide a thorough review of this pull request.
@@ -285,7 +285,7 @@ Claude does **not** have access to execute arbitrary Bash commands by default. I
 **Note**: If your repository has a `.mcp.json` file in the root directory, Claude will automatically detect and use the MCP server tools defined there. However, these tools still need to be explicitly allowed via the `allowed_tools` configuration.
 
 ```yaml
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: semba-yui/claude-code-action@main  # Fork with OAuth support
   with:
     allowed_tools: "Bash(npm install),Bash(npm run test),Edit,Replace,NotebookEditCell"
     disallowed_tools: "TaskOutput,KillTask"
@@ -299,7 +299,7 @@ Claude does **not** have access to execute arbitrary Bash commands by default. I
 Use a specific Claude model:
 
 ```yaml
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: semba-yui/claude-code-action@main  # Fork with OAuth support
   with:
     # model: "claude-3-5-sonnet-20241022"  # Optional: specify a different model
     # ... other inputs
@@ -328,13 +328,13 @@ Use provider-specific model names based on your chosen provider:
 
 ```yaml
 # For direct Anthropic API (default)
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: semba-yui/claude-code-action@main  # Fork with OAuth support
   with:
     anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
     # ... other inputs
 
 # For OAuth authentication (Claude Max subscribers)
-- uses: grll/claude-code-action@beta
+- uses: semba-yui/claude-code-action@main
   with:
     use_oauth: "true"
     claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -343,14 +343,14 @@ Use provider-specific model names based on your chosen provider:
     # ... other inputs
 
 # For Amazon Bedrock with OIDC
-- uses: grll/claude-code-action@beta
+- uses: semba-yui/claude-code-action@main
   with:
     model: "anthropic.claude-3-7-sonnet-20250219-beta:0" # Cross-region inference
     use_bedrock: "true"
     # ... other inputs
 
 # For Google Vertex AI with OIDC
-- uses: grll/claude-code-action@beta
+- uses: semba-yui/claude-code-action@main
   with:
     model: "claude-3-7-sonnet@20250219"
     use_vertex: "true"
@@ -376,7 +376,7 @@ Both AWS Bedrock and GCP Vertex AI require OIDC authentication.
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: semba-yui/claude-code-action@main  # Fork with OAuth support
   with:
     model: "anthropic.claude-3-7-sonnet-20250219-beta:0"
     use_bedrock: "true"
@@ -401,7 +401,7 @@ Both AWS Bedrock and GCP Vertex AI require OIDC authentication.
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-- uses: grll/claude-code-action@beta  # Fork with OAuth support
+- uses: semba-yui/claude-code-action@main  # Fork with OAuth support
   with:
     model: "claude-3-7-sonnet@20250219"
     use_vertex: "true"
